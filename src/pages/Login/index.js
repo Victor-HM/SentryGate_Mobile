@@ -23,40 +23,13 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function AlertComponent({ setAlert }) {
-  return (
-    <Center w='full' position='absolute' zIndex={1000} top={50}>
-      <Alert w="100%" status='error'>
-        <VStack space={2} flexShrink={1} w="100%">
-          <HStack flexShrink={1} space={2} justifyContent="space-between">
-            <HStack space={2} flexShrink={1}>
-              <Alert.Icon mt="1" />
-              <Text fontSize="md" color="coolGray.800">
-                Insira todos os campos
-              </Text>
-            </HStack>
-            <IconButton
-              onPress={() => setAlert(false)}
-              variant="unstyled"
-              _focus={{
-                borderWidth: 0,
-              }}
-              icon={<CloseIcon size="3" />}
-              _icon={{
-                color: "coolGray.600",
-              }}
-            />
-          </HStack>
-        </VStack>
-      </Alert>
-      ;
-    </Center>
-  );
-}
+//components
+import { AlertComponent } from "../../components/AlertComponent";
 
 export function Login({ navigation }) {
   const [show, setShow] = useState(false);
   const [type, setType] = useState("");
+  const [code, setCode] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState(false);
@@ -64,7 +37,7 @@ export function Login({ navigation }) {
   const { colors } = useTheme();
 
   function handleSubmit() {
-    if (email === "" || password === "") {
+    if (type === "" || code === "" || email === "" || password === "") {
       setAlert(true);
     } else {
       navigation.navigate("Home");
@@ -72,48 +45,63 @@ export function Login({ navigation }) {
   }
 
   return (
-    <Center width="full" height="full" backgroundColor="#210d41">
+    <Center width="full" height="full" backgroundColor="purple.600">
       {alert ? <AlertComponent setAlert={setAlert} /> : <></>}
 
-      <View width={200} height={200}>
+      <View width={250} height={250}>
         <Lottie source={require("../../assets/welcome.json")} autoPlay loop />
       </View>
 
       <Box width="full" px="12" mt={10}>
-        <Heading color="white" mb="2">
+        <Heading color="white" mb="2" fontFamily='body' fontWeight='700'>
           Entrar <Text color="orange.500">{type}</Text>{" "}
         </Heading>
 
         <VStack space="2">
           <HStack width="full" justifyContent="space-between">
-            <Select
-              width="40"
-              color="white"
-              borderColor="gray.500"
-              accessibilityLabel="Entrar Como"
-              placeholder="Entrar Como"
-              selectedValue={type}
-              onValueChange={(e) => setType(e)}
-            >
-              <Select.Item label="Professor" value="Professor" />
-              <Select.Item label="Aluno" value="Aluno" />
-              <Select.Item label="Responsavel" value="Responsavel" />
-            </Select>
+            <FormControl width="40" isInvalid={ alert && type === '' ? true : false }>
+              <Select
+                color="white"
+                borderColor="gray.500"
+                accessibilityLabel="Entrar Como"
+                placeholder="Entrar Como"
+                selectedValue={type}
+                onValueChange={(e) => setType(e)}
+              >
+                <Select.Item label="Professor" value="Professor" />
+                <Select.Item label="Aluno" value="Aluno" />
+                <Select.Item label="Responsavel" value="Responsavel" />
+              </Select>
+              <FormControl.ErrorMessage>
+                Campo vazio ou inválido
+              </FormControl.ErrorMessage>
+                
+            </FormControl>
 
-            <Input
-              width={32}
-              placeholder="Código"
-              borderColor="gray.500"
-              color="white"
-              _focus={{
-                borderWidth: 1,
-                borderColor: colors.orange[500],
-                backgroundColor: colors.purple[600],
-              }}
-            />
+            <FormControl width={32} isInvalid={ alert && code === '' ? true : false }>
+              <Input
+                placeholder="Código"
+                borderColor="gray.500"
+                color="white"
+                keyboardType="numeric"
+                maxLength={3}
+                onChangeText={e => setCode(e)}
+                _focus={{
+                  borderWidth: 1,
+                  borderColor: colors.orange[500],
+                  backgroundColor: colors.purple[600],
+                }}
+              />
+              <FormControl.ErrorMessage>
+                Campo vazio ou inválido
+              </FormControl.ErrorMessage>
+
+            </FormControl>
+
           </HStack>
 
-          <FormControl isRequired>
+          <FormControl isRequired isInvalid={ alert && email === '' ? true : false }>
+
             <FormControl.Label>Email</FormControl.Label>
             <Input
               h={16}
@@ -137,11 +125,12 @@ export function Login({ navigation }) {
               }
             />
             <FormControl.ErrorMessage>
-              Campo vazio ou email inválido
+              Campo vazio ou inválido
             </FormControl.ErrorMessage>
           </FormControl>
 
-          <FormControl isRequired>
+          <FormControl isRequired isInvalid={ alert && password === '' ? true : false } >
+            
             <FormControl.Label>Senha</FormControl.Label>
             <Input
               h={16}
@@ -174,7 +163,7 @@ export function Login({ navigation }) {
               }
             />
             <FormControl.ErrorMessage>
-              Campo vazio ou senha inválida
+              Campo vazio ou inválido
             </FormControl.ErrorMessage>
           </FormControl>
 
@@ -182,9 +171,14 @@ export function Login({ navigation }) {
             backgroundColor="orange.500"
             mt={4}
             h={12}
+            shadow={8}
+            _pressed={{
+              shadow: 0,
+              top: 1
+            }}
             onPress={handleSubmit}
           >
-            <Text fontSize="2xl" color="white">
+            <Text fontSize="2xl" color="white" fontFamily='body' fontWeight='400' >
               Entrar
             </Text>
           </Button>
