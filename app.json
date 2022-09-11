@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "SentryGate_Mobile",
+    "name": "SentryGate",
     "slug": "SentryGate_Mobile",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#210d41"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

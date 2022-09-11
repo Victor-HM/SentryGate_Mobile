@@ -1,6 +1,5 @@
-import { NativeBaseProvider, StatusBar } from "native-base";
-import { View } from "react-native";
-import { Home } from "./src/pages/Home";
+import { NativeBaseProvider, StatusBar, useColorMode } from "native-base";
+import 'react-native-gesture-handler';
 import { Routes } from "./src/Routes";
 import { THEME } from "./src/theme/theme";
 import {
@@ -10,6 +9,8 @@ import {
   Rubik_500Medium,
   Rubik_700Bold,
 } from "@expo-google-fonts/rubik";
+import {enableScreens} from 'react-native-screens';
+
 import AppLoading from "expo-app-loading";
 
 export default function App() {
@@ -23,6 +24,7 @@ export default function App() {
   if (!fontsLoaded) {
     return null;
   }
+  
   return (
     <NativeBaseProvider theme={THEME} >
       <StatusBar

@@ -34,5 +34,32 @@ export const THEME = extendTheme({
    mono: 'Rubik'
   }
   
+ },
+ components: {
+  Heading: {
+   baseStyle: () => {
+    return {
+     _dark: { color: 'black' },
+     _light: { color: 'white' }
+    }
+   }
+  },
+  Text: {
+   baseStyle: () => {
+    return {
+     _dark: { color: 'black' },
+     _light: { color: 'white' }
+    }
+   }
+  },
+  Input: {
+   baseStyle: () => {
+    return {
+     _dark: { backgroundColor: '#e9e9e9', color: 'black' },
+     _light: { backgroundColor: 'purple.800', color: 'white' }
+    }
+   }
+  }
  }
+
 })
