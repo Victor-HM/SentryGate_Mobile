@@ -4,8 +4,7 @@ import { HeaderProfile } from "../../components/HeaderProfile";
 export function User() {
  return(
   <VStack w='full' h='full' alignItems='center' _light={{ backgroundColor: 'purple.600' }} _dark={{ backgroundColor: 'white' }} >
-   <HeaderProfile />
-   <VStack alignItems='center' space={10}>
+   <VStack alignItems='center' space={10} py={20}>
     <Avatar 
      source={{ uri: 'https://github.com/Victor-HM.png' }} 
      size='2xl' 

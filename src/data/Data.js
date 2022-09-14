@@ -1,51 +1,42 @@
 export const data = [
  {
   id: '1',
-  disciplina: 'Lingua Portuguesa',
-  nota: ['B', 'R', 'I', 'MB'],
-  media: 'I',
-  faltas: [15, 12, 10, 14],
-  frequencia: '90%'
+  materia: 'Português e Literatura',
+  nota: [[5, 6, 9, 10], [7, 7.5, 9, 8], [7, 5, 8, 9]],
+  notaFinal: [8, 7, 8],
+  frenquecia: [['35%', '75%', '80%', '90%'],['77%', '44%', '67%', '100%'], ['88%', '80%','80%', '80%']],
+  frequenciaFinal: ['70%', '75%', '80%']
  },
  {
   id: '2',
-  disciplina: 'Matemática',
-  nota: ['B', 'R', 'I', 'MB'],
-  media: 'B',
-  faltas: [15, 12, 10, 14],
-  frequencia: '80%'
+  materia: 'Matemática',
+  nota: [[8, 6, 9, 10], [7, 7.5, 9, 8], [7, 5, 8, 9]],
+  notaFinal: [8, 7, 8],
+  frenquecia: [['35%', '75%', '80%', '90%'],['77%', '44%', '67%', '100%'], ['88%', '80%','80%', '80%']],
+  frequenciaFinal: ['70%', '75%', '80%']
  },
  {
   id: '3',
-  disciplina: 'Sociologia',
-  nota: ['B', 'R', 'I', 'MB'],
-  media: 'B',
-  faltas: [15, 12, 10, 14],
-  frequencia: '70%'
+  materia: 'Sociologia',
+  nota: [[8, 6, 9, 10], [7, 7.5, 9, 8], [7, 5, 8, 9]],
+  notaFinal: [8, 7, 8],
+  frenquecia: [['35%', '75%', '80%', '90%'],['77%', '44%', '67%', '100%'], ['88%', '80%','80%', '80%']],
+  frequenciaFinal: ['70%', '75%', '80%']
  },
  {
   id: '4',
-  disciplina: 'Sociologia',
-  nota: ['B', 'R', 'I', 'MB'],
-  media: 'B',
-  faltas: [15, 12, 10, 14],
-  frequencia: '70%'
+  materia: 'Geografia',
+  nota: [[8, 6, 9, 10], [7, 7.5, 9, 8], [7, 5, 8, 9]],
+  notaFinal: [8, 7, 8],
+  frenquecia: [['35%', '75%', '80%', '90%'],['77%', '44%', '67%', '100%'], ['88%', '80%','80%', '80%']],
+  frequenciaFinal: ['70%', '75%', '80%']
  },
  {
   id: '5',
-  disciplina: 'Sociologia',
-  nota: ['B', 'R', 'I', 'MB'],
-  media: 'B',
-  faltas: [15, 12, 10, 14],
-  frequencia: '70%'
+  materia: 'Programação Web',
+  nota: [[8, 6, 9, 10], [7, 7.5, 9, 8], [7, 5, 8, 9]],
+  notaFinal: [8, 7, 8],
+  frenquecia: [['35%', '75%', '80%', '90%'],['77%', '44%', '67%', '100%'], ['88%', '80%','80%', '80%']],
+  frequenciaFinal: ['70%', '75%', '80%']
  },
- {
-  id: '6',
-  disciplina: 'Sociologia',
-  nota: ['B', 'R', 'I', 'MB'],
-  media: 'B',
-  faltas: [15, 12, 10, 14],
-  frequencia: '70%'
- },
- 
 ]

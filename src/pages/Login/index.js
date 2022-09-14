@@ -15,6 +15,7 @@ import {
   useTheme,
   View,
   VStack,
+  Spinner,
 } from "native-base";
 import Lottie from "lottie-react-native";
 import { AntDesign } from "@expo/vector-icons";
@@ -30,35 +31,70 @@ export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [alert, setAlert] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   const { colors } = useTheme();
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (type === "" || email === "" || password === "") {
       setAlert(true);
     } else {
-      navigation.navigate("Config");
+      await setLoading(true)
+      await setTimeout(() => {
+        setLoading(false)
+        navigation.navigate("Config");
+      }, 1000);
     }
   }
 
   return (
-    <Center width="full" height="full" _light={{ backgroundColor: 'purple.600' }} _dark={{ backgroundColor: 'white' }}>
+    <Center
+      width="full"
+      height="full"
+      _light={{ backgroundColor: "purple.600" }}
+      _dark={{ backgroundColor: "white" }}
+    >
       {alert ? <AlertComponent setAlert={setAlert} /> : <></>}
+
+      {loading ? (
+        <>
+          <View
+            w="full"
+            h="full"
+            bg="black"
+            opacity={0.4}
+            position="absolute"
+            zIndex={1000}
+            justifyContent="center"
+          ></View>
+          <Spinner
+            color="warning.500"
+            size="lg"
+            position="absolute"
+            zIndex={1000}
+          />
+        </>
+      ) : (
+        <></>
+      )}
 
       <View width={250} height={250}>
         <Lottie source={require("../../assets/welcome.json")} autoPlay loop />
       </View>
 
       <Box width="full" px="12" mt={10}>
-        <Heading mb="2" fontFamily='body' fontWeight='700'>
+        <Heading mb="2" fontFamily="body" fontWeight="700">
           Entrar <Text color="orange.500">{type}</Text>{" "}
         </Heading>
 
         <VStack space="2">
           <HStack width="full" justifyContent="space-between">
-            <FormControl width="full" isInvalid={ alert && type === '' ? true : false }>
+            <FormControl
+              width="full"
+              isInvalid={alert && type === "" ? true : false}
+            >
               <Select
                 borderColor="gray.500"
                 accessibilityLabel="Entrar Como"
@@ -73,13 +109,13 @@ export function Login() {
               <FormControl.ErrorMessage>
                 Campo vazio ou inválido
               </FormControl.ErrorMessage>
-                
             </FormControl>
-
           </HStack>
 
-          <FormControl isRequired isInvalid={ alert && email === '' ? true : false }>
-
+          <FormControl
+            isRequired
+            isInvalid={alert && email === "" ? true : false}
+          >
             <FormControl.Label>Email</FormControl.Label>
             <Input
               h={16}
@@ -105,8 +141,10 @@ export function Login() {
             </FormControl.ErrorMessage>
           </FormControl>
 
-          <FormControl isRequired isInvalid={ alert && password === '' ? true : false } >
-            
+          <FormControl
+            isRequired
+            isInvalid={alert && password === "" ? true : false}
+          >
             <FormControl.Label>Senha</FormControl.Label>
             <Input
               h={16}
@@ -148,11 +186,16 @@ export function Login() {
             shadow={8}
             _pressed={{
               shadow: 0,
-              top: 1
+              top: 1,
             }}
             onPress={handleSubmit}
           >
-            <Text fontSize="2xl" color="white" fontFamily='body' fontWeight='400' >
+            <Text
+              fontSize="2xl"
+              color="white"
+              fontFamily="body"
+              fontWeight="400"
+            >
               Entrar
             </Text>
           </Button>

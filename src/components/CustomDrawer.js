@@ -51,7 +51,7 @@ export function CustomDrawer(props) {
         <Avatar
           source={{ uri: "https://github.com/Victor-HM.png" }}
           size="xl"
-          onPress={() => navigation.navigate("User")}
+          onPress={toggleColorMode}
         />
         <VStack w="full" space={2}>
           <Heading textAlign="center">Victor Hugo</Heading>

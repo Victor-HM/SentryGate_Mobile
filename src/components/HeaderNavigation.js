@@ -18,6 +18,7 @@ export function HeaderNavigation() {
    height={100}
    alignItems='center'
    justifyContent='space-between'
+   px={10}
   >
   <AntDesign name="arrowleft" size={24} color={ colorMode === 'light' ? 'white' : 'black' } onPress={goBack} />
   </HStack>
