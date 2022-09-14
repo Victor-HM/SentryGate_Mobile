@@ -60,8 +60,7 @@ export function Declare({ navigation }) {
       <HeaderNavigation />
       <VStack w="full" px={5} space={10}>
         <Center w="full" h={24} bg="#6C63FF" borderRadius={10}>
-          <Heading color='white-*+6
-          3'>Declaração Escolar</Heading>
+          <Heading color='white'>Declaração Escolar</Heading>
         </Center>
 
         <VStack space={5}>
