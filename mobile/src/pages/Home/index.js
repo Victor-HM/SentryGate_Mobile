@@ -19,7 +19,6 @@ import { Header } from "../../components/Header";
 
 import letter2 from "../../assets/letter-2.png";
 import letter from "../../assets/letter.png";
-import { useNavigation } from "@react-navigation/native";
 
 export function Home({ navigation }) {
   let color = useColorModeValue("purple.700", "black");
@@ -42,8 +41,8 @@ export function Home({ navigation }) {
           justifyContent="space-between"
           alignItems="center"
           borderRadius={15}
-          flexDirection='row'
-          onPress={() => navigation.navigate('Declare')}
+          flexDirection="row"
+          onPress={() => navigation.navigate("Declare")}
         >
           <VStack>
             <Text fontSize={20} color="white">
@@ -68,11 +67,11 @@ export function Home({ navigation }) {
           justifyContent="space-between"
           alignItems="center"
           borderRadius={15}
-          flexDirection='row'
-          onPress={() => navigation.navigate('Boletim')}
+          flexDirection="row"
+          onPress={() => navigation.navigate("Boletim")}
         >
           <VStack>
-            <Text fontSize={20} color="white" >
+            <Text fontSize={20} color="white">
               Visualizar
             </Text>
             <Text fontSize={20} color="white">

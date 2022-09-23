@@ -15,15 +15,17 @@ import {
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import { useTheme } from "native-base";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { GoogleLogo } from "phosphor-react-native";
 import Logo from '../assets/logo_orange.png'
+import Context from "../contexts/Context";
 
 export function Header() {
   const [showNotification, setShowNotification] = useState(false);
 
   const { colors } = useTheme();
   const { colorMode } = useColorMode()
+  const { user } = useContext(Context)
 
   const notifications = [
     {
@@ -53,7 +55,7 @@ export function Header() {
         <Avatar source={{ uri: "https://github.com/Victor-HM.png" }} />
         <VStack>
           <Text fontSize={16}>
-            Olá, <Text color="orange.500">Victor</Text>
+            Olá, <Text color="orange.500">{user.nome}</Text>
           </Text>
           <Text>Bem Vindo!</Text>
         </VStack>

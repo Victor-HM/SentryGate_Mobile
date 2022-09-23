@@ -10,5 +10,4 @@ const connection = new Sequelize(dbConfig);
 Aluno.init(connection);
 Responsavel.init(connection);
 
-
 module.exports = connection;

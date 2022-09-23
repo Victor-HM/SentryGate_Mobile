@@ -1,7 +1,9 @@
+import React, { useContext, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import api from "../../services/api";
 import {
-  Alert,
   Box,
   Button,
   Center,
@@ -17,13 +19,15 @@ import {
   VStack,
   Spinner,
 } from "native-base";
+
 import Lottie from "lottie-react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-//components
 import { AlertComponent } from "../../components/AlertComponent";
+import { Loading } from "../../components/Loading";
+import Context from "../../contexts/Context";
 
 export function Login() {
   const [show, setShow] = useState(false);
@@ -36,15 +40,28 @@ export function Login() {
   const navigation = useNavigation();
 
   const { colors } = useTheme();
+  const { user, setUser, setAuth } = useContext(Context);
 
   async function handleSubmit() {
     if (type === "" || email === "" || password === "") {
       setAlert(true);
     } else {
-      await setLoading(true)
+      await setLoading(true);
+      try {
+        const response = await api.post("/alunos", {
+          email: email,
+          senha: password,
+        });
+
+        await AsyncStorage.setItem("user", JSON.stringify(response.data));
+        setUser(response.data);
+      } catch (error) {
+        console.log(error);
+      }
       await setTimeout(() => {
-        setLoading(false)
-        navigation.navigate("Config");
+        setAuth(true);
+        setLoading(false);
+        navigation.navigate("DrawerRoute");
       }, 1000);
     }
   }
@@ -58,27 +75,7 @@ export function Login() {
     >
       {alert ? <AlertComponent setAlert={setAlert} /> : <></>}
 
-      {loading ? (
-        <>
-          <View
-            w="full"
-            h="full"
-            bg="black"
-            opacity={0.4}
-            position="absolute"
-            zIndex={1000}
-            justifyContent="center"
-          ></View>
-          <Spinner
-            color="warning.500"
-            size="lg"
-            position="absolute"
-            zIndex={1000}
-          />
-        </>
-      ) : (
-        <></>
-      )}
+      {loading ? <Loading /> : <></>}
 
       <View width={250} height={250}>
         <Lottie source={require("../../assets/welcome.json")} autoPlay loop />
@@ -86,7 +83,7 @@ export function Login() {
 
       <Box width="full" px="12" mt={10}>
         <Heading mb="2" fontFamily="body" fontWeight="700">
-          Entrar <Text color="orange.500">{type}</Text>{" "}
+          Entrar
         </Heading>
 
         <VStack space="2">

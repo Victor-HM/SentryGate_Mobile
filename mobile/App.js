@@ -12,6 +12,7 @@ import {
 import {enableScreens} from 'react-native-screens';
 
 import AppLoading from "expo-app-loading";
+import { StoreProvider } from "./src/contexts/Provider";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -31,7 +32,9 @@ export default function App() {
         backgroundColor={THEME.colors.purple[600]}
         barStyle="light-content"
       />
-      <Routes />
+      <StoreProvider>
+        <Routes />
+      </StoreProvider>
     </NativeBaseProvider>
   );
 }

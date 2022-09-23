@@ -15,6 +15,7 @@ import {
 import { useState } from "react";
 import { AlertComponent } from "../../components/AlertComponent";
 import { HeaderNavigation } from "../../components/HeaderNavigation";
+import { Loading } from "../../components/Loading";
 
 export function Declare({ navigation }) {
   const { colors } = useTheme();
@@ -37,30 +38,14 @@ export function Declare({ navigation }) {
   }
 
   return (
-    <VStack w="full" h="full" bg={useColorModeValue("purple.600", 'white')}>
-      {alert ? <AlertComponent setAlert={setAlert} /> : <></>}
+    <VStack w="full" h="full" bg={useColorModeValue("purple.600", "white")}>
+      { alert ? <AlertComponent setAlert={setAlert} /> : <></> }
 
-      {loading ? (
-        <>
-        <View w='full' h='full' bg='rgba(0, 0, 0, 0.4)' position="absolute" zIndex={1000} justifyContent='center' alignItems='center'>
-          <Spinner
-            color="warning.500"
-            size="lg"
-            position="absolute"
-            justifyContent='center'
-            alignItems='center'
-            opacity={1}
-          />
-
-        </View>
-        </>
-      ) : (
-        <></>
-      )}
+      { loading ? <Loading /> :  <></> }
       <HeaderNavigation />
       <VStack w="full" px={5} space={10}>
         <Center w="full" h={24} bg="#6C63FF" borderRadius={10}>
-          <Heading color='white'>Declaração Escolar</Heading>
+          <Heading color="white">Declaração Escolar</Heading>
         </Center>
 
         <VStack space={5}>

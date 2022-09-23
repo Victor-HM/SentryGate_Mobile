@@ -1,8 +1,10 @@
+import { useContext, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useNavigation } from "@react-navigation/native";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { useNavigation } from "@react-navigation/native";
 
 import {
   Avatar,
@@ -16,21 +18,44 @@ import {
 } from "native-base";
 
 import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+import Context from "../contexts/Context";
+import { Loading } from "./Loading";
 
 export function CustomDrawer(props) {
+  const [loading, setLoading] = useState(false);
+
   const navigation = useNavigation();
-  const { colorMode, toggleColorMode } = useColorMode();
-  let color = useColorModeValue("white", 'black')
+  const { toggleColorMode } = useColorMode();
+  const { user, setUser, setAuth } = useContext(Context);
+
+  let color = useColorModeValue("white", "black");
+
+  async function Exit() {
+    await setLoading(true);
+    await AsyncStorage.clear();
+    setUser({});
+    await setTimeout(() => {
+      setAuth(false);
+      setLoading(false);
+      navigation.navigate("Login");
+    }, 1000);
+  }
+
   return (
     <DrawerContentScrollView
       contentContainerStyle={{
         height: "100%",
       }}
     >
+      {loading ? <Loading /> : <></>}
       <VStack w="full" alignItems="center" space={10} mb={5}>
         <View position="absolute" left={5} top={5}>
-          <FontAwesome name="gear" size={24} color={color} />
+          <Ionicons
+            name="exit-outline"
+            size={24}
+            color={color}
+            onPress={Exit}
+          />
         </View>
         <View position="absolute" right={5} top={5}>
           {useColorModeValue(
@@ -54,9 +79,9 @@ export function CustomDrawer(props) {
           onPress={toggleColorMode}
         />
         <VStack w="full" space={2}>
-          <Heading textAlign="center">Victor Hugo</Heading>
+          <Heading textAlign="center"> {user.nome} </Heading>
           <Text textAlign="center" opacity={0.7}>
-            (11) 96969-5347
+            {user.email}
           </Text>
         </VStack>
 
